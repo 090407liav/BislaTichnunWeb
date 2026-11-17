@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BislaTichnunWeb.CourseEvent">
+    <Position X="4.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABAAAEAAAAAAAAABAAAAAAAgA=</HashCode>
+      <FileName>Handlers\Modals\CourseEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BislaTichnunWeb.Course">
+    <Position X="9.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAQQAAAAEAAEAAAAAAgAAAAAAAAAgAAAEAAAgA=</HashCode>
+      <FileName>Handlers\Modals\BasicEntities.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BislaTichnunWeb.DutyType">
+    <Position X="11.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACBAAAAAAgAAAAAAAAAAAAAAAQAAAAAAAAgABAAAA=</HashCode>
+      <FileName>Handlers\Modals\BasicEntities.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BislaTichnunWeb.WeekInfo">
+    <Position X="13" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAEAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Handlers\Modals\BasicEntities.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BislaTichnunWeb.DutyAssignment">
+    <Position X="7.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAkEAAAAgAAAAAAAAAAAAAAAAAACAAAAAAAAAgA=</HashCode>
+      <FileName>Handlers\Modals\DutyAssignment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BislaTichnunWeb.GanttItem">
+    <Position X="6" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAmAAEAAAAAAAAAAAAAAAAgAAAAAAACABAAgEAAAgA=</HashCode>
+      <FileName>Handlers\Modals\GanttItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="BislaTichnunWeb.GanttItemType">
+    <Position X="13" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Handlers\Modals\Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BislaTichnunWeb.AssignmentStatus">
+    <Position X="9.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAgAAAAAAAA=</HashCode>
+      <FileName>Handlers\Modals\Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BislaTichnunWeb.ViewMode">
+    <Position X="9.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAgAAAAAAAA=</HashCode>
+      <FileName>Handlers\Modals\Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BislaTichnunWeb.ViewScale">
+    <Position X="12.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Handlers\Modals\Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BislaTichnunWeb.CourseEventType">
+    <Position X="11.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAABAEAAAIgABBAAAAAAEA=</HashCode>
+      <FileName>Handlers\Modals\Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

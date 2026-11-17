@@ -1,0 +1,1164 @@
+﻿/* ============================================================
+   ביסל"ט — עיצוב כללי (RTL, כהה-כחול-צבאי)
+   ============================================================ */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    direction: rtl;
+    font-family: Tahoma, 'Segoe UI', Arial, sans-serif;
+    font-size: 14px;
+    background: #0d1826;
+    color: #c8d8ec;
+    height: 100%;
+}
+
+a {
+    color: #29abe2;
+    text-decoration: none;
+}
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+/* ── Layout ────────────────────────────────────────────────── */
+    .layout {
+        display: flex;
+        min-height: 100vh;
+    }
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    min-width: 250px;
+    transition: width 0.35s ease, min-width 0.35s ease;
+    overflow: hidden;
+}
+
+    /* Collapsed sidebar */
+    .sidebar.collapsed {
+        width: 70px;
+        min-width: 70px;
+    }
+
+/* Sidebar header */
+.sidebar-header {
+    position: relative;
+    min-height: 80px;
+    padding: 20px 15px;
+    white-space: nowrap;
+}
+
+/* Logo and subtitle */
+.sidebar-logo,
+.sidebar-sub {
+    transition: opacity 0.2s ease, transform 0.3s ease;
+    white-space: nowrap;
+}
+
+/* Hide text smoothly */
+.sidebar.collapsed .sidebar-logo,
+.sidebar.collapsed .sidebar-sub {
+    opacity: 0;
+    transform: translateX(15px);
+    pointer-events: none;
+}
+
+/* Navigation items */
+.sidebar .nav-item {
+    white-space: nowrap;
+    transition: opacity 0.25s ease, padding 0.35s ease;
+}
+
+/* Collapsed navigation */
+.sidebar.collapsed .nav-item {
+    font-size: 0;
+    justify-content: center;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* Toggle button */
+#sidebarToggle {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: auto;
+    z-index: 10;
+    background: transparent;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    color: #ffffff;
+    font-size: 22px;
+    padding: 8px;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    transition: transform 0.3s ease, background 0.2s ease;
+}
+
+    #sidebarToggle:hover {
+        background: rgba(255, 255, 255, 0.12);
+        border-radius: 6px;
+    }
+
+    #sidebarToggle:focus {
+        outline: none;
+        box-shadow: none;
+    }
+
+.sidebar.collapsed #sidebarToggle {
+    transform: rotate(180deg);
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    border-radius: 6px;
+    color: #7a99bb;
+    font-size: 13px;
+    margin-bottom: 2px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    text-decoration: none;
+}
+
+    .nav-item:hover {
+        background: #122035;
+        color: #c8d8ec;
+        text-decoration: none;
+    }
+
+    .nav-item.active {
+        background: #0e3055;
+        color: #29abe2;
+        font-weight: bold;
+    }
+
+.nav-icon {
+    width: 18px;
+    height: 18px;
+    opacity: 0.8;
+    flex-shrink: 0;
+}
+
+.sidebar-footer {
+    padding: 12px 16px;
+    border-top: 1px solid #1e3352;
+    font-size: 11px;
+    color: #3d5a78;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-width: 0;
+}
+
+/* ── Page header ───────────────────────────────────────────── */
+.page-header {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 24px;
+    background: #091d33;
+    border-bottom: 1px solid #1e3352;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.page-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #e0eefa;
+}
+
+.page-subtitle {
+    font-size: 12px;
+    color: #5a7fa0;
+    margin-top: 2px;
+}
+
+/* ── Buttons ───────────────────────────────────────────────── */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 16px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-family: inherit;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: background 0.15s, color 0.15s;
+}
+
+.btn-primary {
+    background: #1a6fa8;
+    color: #fff;
+    border-color: #2080c0;
+}
+
+    .btn-primary:hover {
+        background: #2080c0;
+    }
+
+.btn-active {
+    background: #166246;
+    color: #fff;
+    border-color: #1d7d57;
+}
+
+    .btn-active:hover {
+        background: #1d7d57;
+    }
+
+.btn-secondary {
+    background: #122035;
+    color: #aac3e0;
+    border-color: #1e3352;
+}
+
+    .btn-secondary:hover {
+        background: #1a2e47;
+        color: #e0eefa;
+    }
+
+.btn-danger {
+    background: #5c1a1a;
+    color: #f99;
+    border-color: #7a2222;
+}
+
+    .btn-danger:hover {
+        background: #7a2222;
+    }
+
+.btn-sm {
+    padding: 4px 10px;
+    font-size: 12px;
+}
+
+.btn-success {
+    background: #166246;
+    color: #fff;
+    border-color: #1d7d57;
+}
+
+    .btn-success:hover {
+        background: #1d7d57;
+    }
+
+/* ── Toolbar ───────────────────────────────────────────────── */
+.toolbar {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 24px;
+    background: #0d1826;
+    border-bottom: 1px solid #1e3352;
+    flex-wrap: wrap;
+}
+
+.mode-group {
+    display: flex;
+    border: 1px solid #1e3352;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.mode-btn {
+    padding: 6px 16px;
+    font-size: 12px;
+    font-family: inherit;
+    background: transparent;
+    color: #5a7fa0;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+    .mode-btn.active-planning {
+        background: #1a6fa8;
+        color: #fff;
+    }
+
+    .mode-btn.active-active {
+        background: #166246;
+        color: #fff;
+    }
+
+    .mode-btn:hover {
+        background: #122035;
+        color: #c8d8ec;
+    }
+
+.month-nav {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+    .month-nav button {
+        width: 28px;
+        height: 28px;
+        border-radius: 4px;
+        border: 1px solid #1e3352;
+        background: #091d33;
+        color: #5a7fa0;
+        font-size: 16px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .month-nav button:hover {
+            background: #122035;
+            color: #c8d8ec;
+        }
+
+.month-label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #c8d8ec;
+    min-width: 130px;
+    text-align: center;
+}
+
+.toolbar-spacer {
+    flex: 1;
+}
+
+.legend {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: #7a99bb;
+}
+
+.legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    flex-shrink: 0;
+}
+
+/* ── Gantt grid ────────────────────────────────────────────── */
+.gantt-wrap {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+    min-height: 0;
+}
+
+.gantt-scroll {
+    flex: 1;
+    overflow: auto;
+}
+
+.gantt-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+    .gantt-table th, .gantt-table td {
+        border: 1px solid #1a2e47;
+        padding: 0;
+    }
+
+    .gantt-table thead th {
+        background: #091d33;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        white-space: nowrap;
+    }
+
+    .gantt-table thead .month-header th {
+        background: #0a2240;
+        font-size: 12px;
+        font-weight: bold;
+        color: #7ab3d8;
+        padding: 5px 8px;
+        text-align: center;
+    }
+
+    .gantt-table thead .week-header th {
+        font-size: 11px;
+        color: #5a7fa0;
+        padding: 6px 4px;
+        text-align: center;
+        min-width: 110px;
+    }
+
+.course-header-th {
+    position: sticky !important;
+    right: 0;
+    z-index: 20 !important;
+    background: #091d33 !important;
+    min-width: 175px;
+    width: 175px;
+    text-align: right !important;
+    font-size: 12px;
+    padding: 6px 10px !important;
+    color: #5a7fa0;
+}
+
+.course-cell {
+    position: sticky;
+    right: 0;
+    z-index: 5;
+    background: #0d1826;
+    padding: 6px 10px;
+    min-width: 175px;
+    width: 175px;
+    vertical-align: middle;
+}
+
+.course-number {
+    font-size: 10px;
+    color: #4a6a88;
+    font-family: Courier New, monospace;
+}
+
+.course-name {
+    font-size: 13px;
+    font-weight: bold;
+    color: #c8d8ec;
+}
+
+.course-count {
+    font-size: 11px;
+    color: #4a6a88;
+}
+
+.gantt-cell {
+    padding: 3px;
+    vertical-align: top;
+    min-height: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: background 0.1s;
+}
+
+    .gantt-cell:hover {
+        background: rgba(26, 111, 168, 0.08);
+    }
+
+    .gantt-cell.drag-over {
+        background: rgba(26, 111, 168, 0.22) !important;
+        outline: 2px solid #29abe2;
+        outline-offset: -2px;
+    }
+
+.cell-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-height: 34px;
+}
+
+/* ── Duty chip ─────────────────────────────────────────────── */
+.chip {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 4px;
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+    margin-bottom: 2px;
+    border-right: 3px solid transparent;
+    cursor: grab;
+    user-select: none;
+    transition: opacity 0.15s;
+}
+
+    .chip:active {
+        cursor: grabbing;
+        opacity: 0.6;
+    }
+
+    .chip.confirmed::after {
+        content: ' ✓';
+        opacity: 0.8;
+    }
+
+.chip-date {
+    font-size: 10px;
+    opacity: 0.6;
+    display: block;
+    margin-top: 1px;
+}
+
+.add-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 34px;
+    opacity: 0;
+    color: #3a5a78;
+    font-size: 20px;
+    transition: opacity 0.15s;
+}
+
+.gantt-cell:hover .add-hint {
+    opacity: 1;
+}
+
+/* ── Duty bank ─────────────────────────────────────────────── */
+.duty-bank {
+    width: 140px;
+    flex-shrink: 0;
+    border-right: 1px solid #1e3352;
+    background: #091220;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.bank-header {
+    padding: 10px 12px 6px;
+    border-bottom: 1px solid #1e3352;
+    font-size: 11px;
+    font-weight: bold;
+    color: #5a7fa0;
+}
+
+.bank-sub {
+    font-size: 10px;
+    color: #3a5270;
+    margin-top: 2px;
+    font-weight: normal;
+}
+
+.bank-items {
+    padding: 8px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.bank-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 8px;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    font-size: 12px;
+    margin-bottom: 6px;
+    cursor: grab;
+    user-select: none;
+    transition: opacity 0.15s;
+}
+
+    .bank-chip:active {
+        cursor: grabbing;
+        opacity: 0.5;
+    }
+
+.bank-chip-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.bank-chip-days {
+    font-size: 10px;
+    opacity: 0.55;
+    margin-right: auto;
+}
+
+.bank-footer {
+    padding: 8px 10px;
+    border-top: 1px solid #1e3352;
+    font-size: 10px;
+    color: #2a4060;
+}
+
+/* ── View: active-only banner ─────────────────────────────── */
+.active-banner {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    background: #0a2214;
+    color: #3dbb7e;
+    border: 1px solid #1a4a2e;
+    padding: 4px 12px;
+    border-radius: 5px;
+}
+
+/* ── Tables (Courses / DutyTypes pages) ────────────────────── */
+.page-body {
+    padding: 24px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.card {
+    background: #091d33;
+    border: 1px solid #1e3352;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.card-header {
+    padding: 14px 18px;
+    border-bottom: 1px solid #1e3352;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.card-title {
+    font-size: 15px;
+    font-weight: bold;
+    color: #c8d8ec;
+}
+
+.card-body {
+    padding: 0;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .data-table th {
+        background: #0a2240;
+        padding: 9px 14px;
+        font-size: 12px;
+        font-weight: bold;
+        color: #5a7fa0;
+        text-align: right;
+        border-bottom: 1px solid #1e3352;
+    }
+
+    .data-table td {
+        padding: 9px 14px;
+        font-size: 13px;
+        border-bottom: 1px solid #122035;
+        vertical-align: middle;
+    }
+
+    .data-table tr:last-child td {
+        border-bottom: none;
+    }
+
+    .data-table tr:hover td {
+        background: #0d2236;
+    }
+
+.badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.badge-active {
+    background: #0a2214;
+    color: #3dbb7e;
+    border: 1px solid #1a4a2e;
+}
+
+.badge-inactive {
+    background: #2a1a1a;
+    color: #bb6666;
+    border: 1px solid #4a2222;
+}
+
+/* ── Modal / Dialog ────────────────────────────────────────── */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0,0,0,.65);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+    .modal-overlay.show {
+        display: flex;
+    }
+
+.modal {
+    background: #091d33;
+    border: 1px solid #1e3352;
+    border-radius: 8px;
+    width: 420px;
+    max-width: 95vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,.6);
+}
+
+.modal-header {
+    padding: 14px 18px;
+    border-bottom: 1px solid #1e3352;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+.modal-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #c8d8ec;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    color: #5a7fa0;
+    font-size: 20px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.modal-close:hover {
+    color: #c8d8ec;
+}
+
+.modal-body {
+    padding: 16px 18px;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.modal-footer {
+    padding: 12px 18px;
+    border-top: 1px solid #1e3352;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: flex-end;
+    flex-shrink: 0;
+    background: #091d33;
+}
+
+/* ── Form fields ───────────────────────────────────────────── */
+.form-group {
+    margin-bottom: 12px;
+}
+
+.form-label {
+    display: block;
+    font-size: 12px;
+    color: #7a99bb;
+    margin-bottom: 4px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 7px 10px;
+    background: #0a1e35;
+    border: 1px solid #1e3352;
+    border-radius: 5px;
+    color: #c8d8ec;
+    font-size: 13px;
+    font-family: inherit;
+    outline: none;
+    direction: rtl;
+}
+
+    .form-control:focus {
+        border-color: #29abe2;
+    }
+
+.form-row {
+    display: flex;
+    gap: 10px;
+}
+
+    .form-row .form-group {
+        flex: 1;
+    }
+
+.duty-type-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 10px;
+    border-radius: 5px;
+    border: 1px solid #1e3352;
+    margin-bottom: 5px;
+    cursor: pointer;
+    background: #0a1e35;
+    transition: border-color 0.15s;
+}
+
+    .duty-type-option.selected {
+        border-color: #29abe2;
+        background: #0e2e4a;
+    }
+
+    .duty-type-option input {
+        accent-color: #29abe2;
+    }
+
+.duty-type-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+}
+
+/* ── Dashboard stats ───────────────────────────────────────── */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    background: #091d33;
+    border: 1px solid #1e3352;
+    border-radius: 8px;
+    padding: 16px 20px;
+}
+
+.stat-value {
+    font-size: 28px;
+    font-weight: bold;
+    color: #29abe2;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: #5a7fa0;
+    margin-top: 4px;
+}
+
+/* ── Alerts ────────────────────────────────────────────────── */
+.alert {
+    padding: 10px 14px;
+    border-radius: 5px;
+    margin-bottom: 14px;
+    font-size: 13px;
+}
+
+.alert-success {
+    background: #0a2214;
+    color: #3dbb7e;
+    border: 1px solid #1a4a2e;
+}
+
+.alert-error {
+    background: #2a1a1a;
+    color: #f99;
+    border: 1px solid #4a2222;
+}
+
+/* ── Color swatch ──────────────────────────────────────────── */
+.color-swatch {
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    border: 1px solid #1e3352;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+/* ============================================================
+   BISLAT - Excel-like Gantt enhancements
+   ============================================================ */
+
+
+    .excel-search-wrap {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .excel-search-wrap label {
+        color: #aac3e0;
+        font-size: 12px;
+        font-weight: bold;
+        white-space: nowrap;
+    }
+
+    .excel-search-wrap input {
+        flex: 1;
+        min-width: 140px;
+        padding: 7px 10px;
+        border: 1px solid #294565;
+        border-radius: 4px;
+        background: #0d1826;
+        color: #e0eefa;
+        font-family: inherit;
+        font-size: 12px;
+        outline: none;
+    }
+
+        .excel-search-wrap input:focus,
+        .excel-filter input:focus {
+            border-color: #29abe2;
+        }
+
+    .excel-filters {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(100px, 1fr));
+        gap: 7px;
+    }
+
+.excel-filter {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+    .excel-filter span {
+        font-size: 10px;
+        color: #7a99bb;
+    }
+
+    .excel-filter input {
+        width: 100%;
+        min-width: 0;
+        padding: 6px 7px;
+        border: 1px solid #1e3352;
+        border-radius: 4px;
+        background: #0d1826;
+        color: #c8d8ec;
+        font-family: inherit;
+        font-size: 11px;
+        outline: none;
+    }
+
+.excel-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 11px;
+    color: #7a99bb;
+}
+
+.excel-select-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+    .excel-select-all input,
+    .course-row-selector {
+        accent-color: #29abe2;
+        cursor: pointer;
+    }
+
+# 【
+gantt-selection-count】 {
+    color: #aac3e0;
+}
+
+#gantt-clear-filters {
+    padding: 5px 10px;
+    background: #122035;
+    color: #aac3e0;
+    border: 1px solid #294565;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 11px;
+}
+
+    #gantt-clear-filters:hover {
+        background: #1a2e47;
+    }
+
+.gantt-table {
+    table-layout: auto;
+}
+
+    .gantt-table tbody tr {
+        height: 38px;
+    }
+
+        .gantt-table tbody tr:hover td {
+            background-color: rgba(41, 171, 226, 0.06);
+        }
+
+        .gantt-table tbody tr.course-row-selected td {
+            box-shadow: inset 0 1px rgba(41, 171, 226, 0.3), inset 0 -1px rgba(41, 171, 226, 0.3);
+        }
+
+.course-cell {
+    min-width: 190px;
+    width: 190px;
+    padding: 4px 8px;
+}
+
+    .course-cell .course-row-selector {
+        float: right;
+        margin-left: 7px;
+        margin-top: 4px;
+    }
+
+.course-gaf,
+.course-profession,
+.course-number,
+.course-name,
+.course-dates,
+.course-count {
+    line-height: 1.35;
+}
+
+.course-gaf {
+    font-size: 10px;
+    color: #7ab3d8;
+}
+
+.course-profession {
+    font-size: 10px;
+    color: #5a7fa0;
+}
+
+.course-number {
+    font-size: 10px;
+}
+
+.course-name {
+    font-size: 11px;
+}
+
+.course-dates,
+.course-count {
+    font-size: 10px;
+}
+
+.gantt-cell {
+    height: 38px;
+    min-height: 38px;
+    padding: 2px;
+}
+
+.cell-inner {
+    min-height: 32px;
+    gap: 2px;
+}
+
+.chip {
+    gap: 2px;
+    padding: 2px 4px;
+    font-size: 10px;
+    margin-bottom: 1px;
+}
+
+.chip-date {
+    font-size: 9px;
+}
+
+.gantt-color-menu {
+    display: none;
+    position: absolute;
+    z-index: 2000;
+    width: 180px;
+    padding: 10px;
+    border: 1px solid #294565;
+    border-radius: 6px;
+    background: #091d33;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+.gantt-color-title {
+    margin-bottom: 8px;
+    color: #c8d8ec;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.gantt-color-menu button[data-color] {
+    width: 23px;
+    height: 23px;
+    margin: 2px;
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.gantt-color-menu .gantt-color-close {
+    display: block;
+    width: 100%;
+    margin-top: 7px;
+    padding: 5px;
+    border: 1px solid #294565;
+    border-radius: 4px;
+    background: #122035;
+    color: #c8d8ec;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.gantt-cell.manually-colored {
+    background-image: none;
+}
+
+@media (max-width: 1100px) {
+    .excel-filters {
+        grid-template-columns: repeat(3, minmax(100px, 1fr));
+    }
+
+    .duty-bank {
+        width: 115px;
+    }
+
+    .course-cell,
+    .course-header-th {
+        min-width: 165px;
+        width: 165px;
+    }
+}
+
+@media (max-width: 700px) {
+    .excel-filters {
+        grid-template-columns: repeat(2, minmax(90px, 1fr));
+    }
+
+    .excel-search-wrap {
+        align-items: stretch;
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,945 @@
+﻿
+/* =========================================================
+   BISLAT - Planning Gantt
+   ========================================================= */
+
+.gantt-page {
+    direction: rtl;
+    color: #c8d8ec;
+    font-family: Tahoma, 'Segoe UI', Arial, sans-serif;
+    font-size: 13px;
+    width: 100%;
+    min-width: 0;
+}
+
+    .gantt-page,
+    .gantt-page * {
+        box-sizing: border-box;
+    }
+
+        /* Header */
+
+        .gantt-page .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding: 14px 20px;
+            background: #091d33;
+            border-bottom: 1px solid #1e3352;
+        }
+
+        .gantt-page .page-title {
+            color: #e0eefa;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .gantt-page .page-subtitle {
+            color: #5a7fa0;
+            font-size: 12px;
+            margin-top: 3px;
+        }
+
+        .gantt-page .header-actions {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .gantt-page .mode-group {
+            display: flex;
+            border: 1px solid #1e3352;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .gantt-page .mode-btn {
+            padding: 7px 12px;
+            font-family: inherit;
+            font-size: 12px;
+            background: #0d1826;
+            color: #7a99bb;
+            border: none;
+            cursor: pointer;
+        }
+
+            .gantt-page .mode-btn:hover {
+                background: #122035;
+                color: #c8d8ec;
+            }
+
+            .gantt-page .mode-btn.active-planning {
+                background: #1a6fa8;
+                color: #fff;
+            }
+
+            .gantt-page .mode-btn.active-active {
+                background: #166246;
+                color: #fff;
+            }
+
+        /* Toolbar */
+
+        .gantt-page .toolbar {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 10px 20px;
+            background: #0d1826;
+            border-bottom: 1px solid #1e3352;
+        }
+
+        .gantt-page .month-nav {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+            .gantt-page .month-nav button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 28px;
+                height: 28px;
+                background: #091d33;
+                color: #7a99bb;
+                border: 1px solid #1e3352;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+                .gantt-page .month-nav button:hover {
+                    background: #122035;
+                    color: #e0eefa;
+                }
+
+        .gantt-page .month-label {
+            min-width: 130px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            color: #c8d8ec;
+        }
+
+        .gantt-page .legend {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .gantt-page .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #7a99bb;
+            font-size: 11px;
+        }
+
+        .gantt-page .legend-dot {
+            width: 10px;
+            height: 10px;
+            flex-shrink: 0;
+            border-radius: 3px;
+        }
+
+        .gantt-page .approved-legend {
+            color: #3dbb7e;
+        }
+
+        /* Excel toolbar */
+
+        .gantt-page .excel-tools {
+            display: flex;
+            flex-direction: row;
+            direction: rtl;
+            align-items: flex-end;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            gap: 10px;
+            width: 100%;
+            padding: 12px 16px;
+            margin: 0;
+            background: #091220;
+            border-bottom: 1px solid #1e3352;
+            color: #c8d8ec;
+        }
+
+        .gantt-page .excel-search {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            width: 280px;
+            max-width: 100%;
+            min-width: 180px;
+            flex: 1 1 280px;
+        }
+
+            .gantt-page .excel-search label {
+                color: #7a99bb;
+                font-size: 11px;
+                font-weight: bold;
+            }
+
+            .gantt-page .excel-search input {
+                width: 100%;
+                min-width: 0;
+                height: 34px;
+                padding: 7px 10px;
+                background: #0d1826;
+                color: #e0eefa;
+                border: 1px solid #294565;
+                border-radius: 5px;
+                font-family: inherit;
+                font-size: 12px;
+                outline: none;
+            }
+
+                .gantt-page .excel-search input:focus {
+                    border-color: #29abe2;
+                }
+
+                .gantt-page .excel-search input::placeholder {
+                    color: #4a6a88;
+                }
+
+        .gantt-page .excel-tool-actions {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 7px;
+            flex: 0 1 auto;
+        }
+
+        .gantt-page .excel-button {
+            min-height: 34px;
+            padding: 6px 11px;
+            background: #122035;
+            color: #aac3e0;
+            border: 1px solid #294565;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        .gantt-page .excel-button:hover {
+            background: #1a2e47;
+            color: #e0eefa;
+            border-color: #29abe2;
+        }
+
+        .gantt-page .selection-status {
+            width: 100%;
+            color: #7a99bb;
+            font-size: 11px;
+        }
+
+            .gantt-page .selection-status strong {
+                color: #29abe2;
+            }
+
+        .gantt-page .toolbar-hint {
+            padding: 7px 16px;
+            background: #0d1826;
+            color: #4a6a88;
+            font-size: 11px;
+            border-bottom: 1px solid #1e3352;
+        }
+
+        /* Column menu */
+
+        .gantt-page .columns-menu {
+            position: relative;
+            z-index: 100;
+        }
+
+        .gantt-page .columns-menu-content {
+            display: none;
+            position: absolute;
+            top: calc(100% + 4px);
+            right: 0;
+            z-index: 200;
+            min-width: 190px;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+            background: #091d33;
+            color: #c8d8ec;
+            border: 1px solid #294565;
+            border-radius: 6px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+        }
+
+        .gantt-page .columns-menu-title {
+            margin-bottom: 8px;
+            color: #e0eefa;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .gantt-page .column-option {
+            display: block;
+            padding: 6px 3px;
+            color: #aac3e0;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+            .gantt-page .column-option:hover {
+                background: #122035;
+            }
+
+            .gantt-page .column-option input {
+                margin-left: 6px;
+                accent-color: #29abe2;
+            }
+
+        /* Gantt layout */
+
+        .gantt-page .gantt-wrap {
+            display: flex;
+            flex-direction: row;
+            direction: ltr;
+            align-items: stretch;
+            gap: 0;
+            width: 100%;
+            min-width: 0;
+            min-height: 0;
+            overflow: hidden;
+            background: #0d1826;
+        }
+
+        .gantt-page .gantt-scroll {
+            order: 2;
+            direction: rtl;
+            flex: 1 1 0;
+            min-width: 0;
+            max-height: 72vh;
+            overflow: auto;
+            background: #0d1826;
+            border: none;
+            scrollbar-color: #294565 #091220;
+        }
+
+        .gantt-page .duty-bank {
+            order: 1;
+            direction: rtl;
+            display: flex;
+            flex-direction: column;
+            flex: 0 0 150px;
+            width: 150px;
+            min-width: 150px;
+            max-width: 150px;
+            overflow: hidden;
+            background: #091220;
+            border-right: 1px solid #1e3352;
+        }
+
+        /* Table */
+
+        .gantt-page .excel-gantt-table {
+            width: max-content;
+            min-width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            table-layout: fixed;
+            background: #0d1826;
+            color: #c8d8ec;
+            font-family: Tahoma, 'Segoe UI', Arial, sans-serif;
+            font-size: 11px;
+        }
+
+            .gantt-page .excel-gantt-table th,
+            .gantt-page .excel-gantt-table td {
+                position: relative;
+                padding: 4px 6px;
+                border-left: 1px solid #1a2e47;
+                border-bottom: 1px solid #1a2e47;
+                text-align: center;
+                vertical-align: middle;
+            }
+
+            .gantt-page .excel-gantt-table thead th {
+                background: #091d33;
+                color: #7a99bb;
+                font-weight: bold;
+                white-space: nowrap;
+            }
+
+            .gantt-page .excel-gantt-table thead .month-header th {
+                position: sticky;
+                top: 0;
+                z-index: 14;
+                height: 32px;
+                padding: 5px 8px;
+                background: #0a2240;
+                color: #7ab3d8;
+                font-size: 11px;
+            }
+
+            .gantt-page .excel-gantt-table thead .column-header-row th {
+                position: sticky;
+                top: 0;
+                z-index: 12;
+                height: 34px;
+                padding: 6px 5px;
+                background: #091d33;
+                color: #7a99bb;
+                font-size: 11px;
+            }
+
+            .gantt-page .excel-gantt-table thead .month-header + .column-header-row th {
+                top: 32px;
+            }
+
+            .gantt-page .excel-gantt-table thead .filter-row th {
+                position: sticky;
+                top: 34px;
+                z-index: 11;
+                height: 34px;
+                padding: 3px;
+                background: #0a1e35;
+            }
+
+            .gantt-page .excel-gantt-table thead .month-header ~ .filter-row th {
+                top: 66px;
+            }
+
+        /* Text filters */
+
+        .gantt-page .column-filter {
+            display: block;
+            width: 100%;
+            min-width: 45px;
+            height: 25px;
+            padding: 3px 5px;
+            background: #0d1826;
+            color: #c8d8ec;
+            border: 1px solid #1e3352;
+            border-radius: 3px;
+            font-family: inherit;
+            font-size: 10px;
+            outline: none;
+        }
+
+            .gantt-page .column-filter:focus {
+                border-color: #29abe2;
+            }
+
+            .gantt-page .column-filter::placeholder {
+                color: #3d5a78;
+            }
+
+        /* Excel-style multi-select filter: Gaf */
+
+        .gantt-page .excel-filter-wrap {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            direction: rtl;
+        }
+
+        .gantt-page .excel-filter-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 23px;
+            height: 23px;
+            padding: 2px 5px;
+            background: #091d33;
+            color: #c8d8ec;
+            border: 1px solid #294565;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 10px;
+            cursor: pointer;
+        }
+
+            .gantt-page .excel-filter-button:hover,
+            .gantt-page .excel-filter-button.filter-active {
+                background: #1678a8;
+                color: #fff;
+                border-color: #29abe2;
+            }
+
+        .gantt-page .excel-filter-menu {
+            position: absolute;
+            top: calc(100% + 5px);
+            right: 0;
+            z-index: 1000;
+            width: 240px;
+            max-width: 80vw;
+            padding: 10px;
+            background: #091d33;
+            color: #c8d8ec;
+            border: 1px solid #294666;
+            border-radius: 6px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+            direction: rtl;
+            text-align: right;
+            white-space: normal;
+            font-weight: normal;
+        }
+
+        .gantt-page .excel-filter-search {
+            display: block;
+            box-sizing: border-box;
+            width: 100%;
+            height: 32px;
+            margin-bottom: 8px;
+            padding: 6px 9px;
+            background: #0d1826;
+            color: #c8d8ec;
+            border: 1px solid #294666;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 12px;
+            outline: none;
+        }
+
+            .gantt-page .excel-filter-search:focus {
+                border-color: #29abe2;
+            }
+
+            .gantt-page .excel-filter-search::placeholder {
+                color: #6683a3;
+            }
+
+        .gantt-page .excel-filter-select-all,
+        .gantt-page .excel-filter-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 4px;
+            color: #c8d8ec;
+            font-size: 12px;
+            font-weight: normal;
+            cursor: pointer;
+        }
+
+        .gantt-page .excel-filter-select-all {
+            border-bottom: 1px solid #1e3352;
+        }
+
+        .gantt-page .excel-filter-options {
+            max-height: 220px;
+            overflow-y: auto;
+            margin-top: 5px;
+            padding: 3px 0;
+        }
+
+        .gantt-page .excel-filter-option:hover {
+            background: #173553;
+        }
+
+        .gantt-page .excel-filter-menu input[type="checkbox"] {
+            margin: 0;
+            flex-shrink: 0;
+            accent-color: #29abe2;
+            cursor: pointer;
+        }
+
+        .gantt-page .excel-filter-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 9px;
+            padding-top: 9px;
+            border-top: 1px solid #1e3352;
+        }
+
+            .gantt-page .excel-filter-actions .excel-button {
+                flex: 1;
+                min-height: 31px;
+            }
+
+        .gantt-page #gafFilterApply {
+            background: #1678a8;
+            border-color: #29abe2;
+            color: #fff;
+        }
+
+            .gantt-page #gafFilterApply:hover {
+                background: #1c8fc4;
+            }
+
+        .gantt-page .gaf-column {
+            overflow: visible;
+        }
+
+        /* Metadata columns */
+
+        .gantt-page .select-column {
+            width: 34px;
+            min-width: 34px !important;
+            max-width: 34px;
+        }
+
+            .gantt-page .select-column input {
+                accent-color: #29abe2;
+                cursor: pointer;
+            }
+
+        .gantt-page .gaf-column {
+            width: 75px;
+            min-width: 75px;
+        }
+
+        .gantt-page .course-num-column {
+            width: 90px;
+            min-width: 90px;
+        }
+
+        .gantt-page .profession-column {
+            width: 85px;
+            min-width: 85px;
+        }
+
+        .gantt-page .course-name-column {
+            width: 180px;
+            min-width: 150px;
+            text-align: right !important;
+        }
+
+        .gantt-page .trainees-column {
+            width: 65px;
+            min-width: 65px;
+        }
+
+        .gantt-page .date-column {
+            width: 90px;
+            min-width: 90px;
+        }
+
+        .gantt-page .course-data-cell {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            background: #0d1826;
+            color: #aac3e0;
+        }
+
+        .gantt-page .course-row:nth-child(even) .course-data-cell {
+            background: #0a1e35;
+        }
+
+        .gantt-page .course-row:hover .course-data-cell {
+            background: #122b43;
+        }
+
+        .gantt-page .course-row.selected-row .course-data-cell {
+            background: #103451;
+            box-shadow: inset 0 1px rgba(41,171,226,.35), inset 0 -1px rgba(41,171,226,.35);
+        }
+
+        .gantt-page .course-name {
+            color: #c8d8ec;
+            font-size: 11px;
+            font-weight: bold;
+            line-height: 1.4;
+            white-space: normal;
+        }
+
+        /* Weekly cells */
+
+        .gantt-page .week-column,
+        .gantt-page .gantt-cell {
+            width: 115px;
+            min-width: 115px;
+        }
+
+        .gantt-page .gantt-cell {
+            height: 58px;
+            padding: 3px !important;
+            vertical-align: top !important;
+            background: #0d1826;
+            cursor: pointer;
+            transition: background .1s;
+        }
+
+        .gantt-page .course-row:nth-child(even) .gantt-cell {
+            background: #0b1a2b;
+        }
+
+        .gantt-page .course-row:hover .gantt-cell {
+            background: #122b43;
+        }
+
+        .gantt-page .course-row.selected-row .gantt-cell {
+            background: #10283e;
+        }
+
+        .gantt-page .gantt-cell:hover {
+            background: #173550 !important;
+        }
+
+        .gantt-page .cell-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 3px;
+            min-height: 48px;
+        }
+
+        .gantt-page .add-hint {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 34px;
+            color: #3a5a78;
+            font-size: 20px;
+            opacity: 0;
+            transition: opacity .15s;
+        }
+
+        .gantt-page .gantt-cell:hover .add-hint {
+            opacity: 1;
+        }
+
+        .gantt-page .gantt-cell.drag-over {
+            background: rgba(26,111,168,.22) !important;
+            outline: 2px dashed #29abe2;
+            outline-offset: -3px;
+        }
+
+        /* Assignment chips */
+
+        .gantt-page .chip {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 2px;
+            max-width: 100%;
+            margin-bottom: 1px;
+            padding: 4px 5px;
+            border: 1px solid rgba(255,255,255,.08);
+            border-right: 3px solid transparent;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: bold;
+            line-height: 1.3;
+            overflow-wrap: anywhere;
+            user-select: none;
+            cursor: grab;
+            transition: opacity .15s;
+        }
+
+            .gantt-page .chip:active {
+                cursor: grabbing;
+                opacity: .65;
+            }
+
+            .gantt-page .chip[draggable="false"] {
+                cursor: default;
+            }
+
+            .gantt-page .chip.confirmed::after {
+                content: " ✓";
+                opacity: .8;
+            }
+
+        .gantt-page .chip-date {
+            display: block;
+            margin-top: 1px;
+            font-size: 9px;
+            font-weight: normal;
+            opacity: .75;
+        }
+
+        /* Column resizing */
+
+        .gantt-page .column-resize-handle {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 20;
+            width: 5px;
+            height: 100%;
+            cursor: col-resize;
+        }
+
+            .gantt-page .column-resize-handle:hover {
+                background: #29abe2;
+            }
+
+        /* Duty bank */
+
+        .gantt-page .bank-header {
+            padding: 10px 12px 7px;
+            background: #091220;
+            border-bottom: 1px solid #1e3352;
+            color: #7a99bb;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .gantt-page .bank-sub {
+            margin-top: 3px;
+            color: #3d5a78;
+            font-size: 10px;
+            font-weight: normal;
+        }
+
+        .gantt-page .bank-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 8px;
+        }
+
+        .gantt-page .bank-chip {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 6px;
+            padding: 7px 8px;
+            border: 1px solid transparent;
+            border-radius: 5px;
+            font-size: 11px;
+            user-select: none;
+            cursor: grab;
+            transition: opacity .15s;
+        }
+
+            .gantt-page .bank-chip:active {
+                cursor: grabbing;
+                opacity: .6;
+            }
+
+        .gantt-page .bank-chip-dot {
+            width: 9px;
+            height: 9px;
+            flex-shrink: 0;
+            border-radius: 2px;
+        }
+
+        .gantt-page .bank-chip-days {
+            margin-right: auto;
+            font-size: 9px;
+            opacity: .7;
+        }
+
+        .gantt-page .bank-footer {
+            padding: 8px 10px;
+            border-top: 1px solid #1e3352;
+            color: #3d5a78;
+            font-size: 10px;
+        }
+
+        /* Modal */
+
+        .gantt-page .modal {
+            background: #091d33;
+            color: #c8d8ec;
+            border: 1px solid #1e3352;
+        }
+
+        .gantt-page .modal-header,
+        .gantt-page .modal-footer {
+            background: #091d33;
+            border-color: #1e3352;
+        }
+
+        .gantt-page .modal-title {
+            color: #c8d8ec;
+        }
+
+        .gantt-page .modal-subtitle {
+            color: #5a7fa0;
+        }
+
+        .gantt-page .modal-body {
+            background: #091d33;
+        }
+
+        .gantt-page .form-control {
+            background: #0a1e35;
+            color: #c8d8ec;
+            border-color: #1e3352;
+        }
+
+        .gantt-page .duty-type-option {
+            background: #0a1e35;
+            border-color: #1e3352;
+            color: #c8d8ec;
+        }
+
+            .gantt-page .duty-type-option:hover,
+            .gantt-page .duty-type-option.selected {
+                background: #0e2e4a;
+                border-color: #29abe2;
+            }
+
+/* Responsive */
+
+@media (max-width: 1000px) {
+    .gantt-page .page-header {
+        padding: 12px;
+    }
+
+    .gantt-page .toolbar {
+        padding: 9px 12px;
+    }
+
+    .gantt-page .duty-bank {
+        flex-basis: 125px;
+        width: 125px;
+        min-width: 125px;
+        max-width: 125px;
+    }
+
+    .gantt-page .excel-search {
+        width: 100%;
+        flex-basis: 100%;
+    }
+
+    .gantt-page .gantt-scroll {
+        max-height: 65vh;
+    }
+}
+
+@media (max-width: 650px) {
+    .gantt-page .gantt-wrap {
+        flex-direction: column;
+        direction: rtl;
+    }
+
+    .gantt-page .gantt-scroll {
+        order: 1;
+        flex: 1 1 auto;
+        width: 100%;
+        min-width: 0;
+        max-height: 65vh;
+    }
+
+    .gantt-page .duty-bank {
+        order: 2;
+        flex: 0 0 auto;
+        width: 100%;
+        min-width: 0;
+        max-width: none;
+        max-height: 180px;
+    }
+
+    .gantt-page .bank-items {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    .gantt-page .bank-chip {
+        margin-bottom: 0;
+    }
+
+    .gantt-page .header-actions,
+    .gantt-page .excel-tool-actions {
+        width: 100%;
+    }
+}
