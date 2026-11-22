@@ -95,10 +95,6 @@
             </div>
 
             <div class="gantt-wrap">
-                <!-- בנק התורנויות וטבלת ה-Gantt נשארים כאן ללא שינוי -->
-            </div>
-
-            <div class="gantt-wrap">
 
                 <div class="duty-bank" id="duty-bank">
                     <div class="bank-header">
@@ -188,7 +184,7 @@
                                     { %>
                                 <th class="week-column" data-col="week_<%= wk.WeekStart.ToString("yyyyMMdd") %>"
                                     style="<%= CurrentViewScale == ViewScale.Quarter ? "min-width:85px;": "min-width:115px;" %>">
-                                    <%= wk.Label %>
+                                    <%= RenderColumnFilter("week_" + wk.WeekStart.ToString("yyyyMMdd"), wk.Label) %>
                                 </th>
                                 <% } %>
                             </tr>
@@ -242,11 +238,20 @@
                                         <% foreach (GanttItem item in cellItems)
                                             {
                                                 string rgb = HexToRgb(item.Color ?? "#888");
+                                                DutyAssignment assignment = item as DutyAssignment;
+                                                string itemMode = assignment != null && assignment.Status == AssignmentStatus.Active ? "active" : "planning";
                                         %>
                                         <div class="chip<%= item.IsApproved ? " confirmed" : "" %>"
                                             draggable="<%= item.IsDraggable ? "true" : "false" %>"
+                                            data-can-drag="<%= item.IsDraggable ? "true" : "false" %>"
                                             data-id="<%= item.Id %>"
                                             data-item-type="<%= item.ItemType %>"
+                                            data-item-name="<%= Server.HtmlEncode(item.ItemName ?? "") %>"
+                                            <% if (assignment != null) { %>
+                                            data-dt-id="<%= assignment.DutyTypeId %>"
+                                            data-mode="<%= itemMode %>"
+                                            data-assignment-mode="<%= itemMode %>"
+                                            <% } %>
                                             data-course-id="<%= item.CourseId %>"
                                             data-start="<%= item.StartDate.ToString("yyyy-MM-dd") %>"
                                             data-end="<%= item.EndDate.ToString("yyyy-MM-dd") %>"

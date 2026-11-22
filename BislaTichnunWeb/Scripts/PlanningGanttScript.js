@@ -145,18 +145,49 @@
         return values.indexOf(value) !== -1;
     }
 
+    function isWeekKey(key) {
+        return key.indexOf("week_") === 0;
+    }
+
+    function getRowValues(row, key) {
+        var cell;
+        var chips;
+        var values = [];
+        var name;
+        var i;
+
+        if (!isWeekKey(key)) {
+            return [row.getAttribute(attributeNames[key]) || ""];
+        }
+
+        cell = row.querySelector('td[data-col="' + key + '"]');
+        chips = cell ? cell.querySelectorAll(".chip") : [];
+
+        for (i = 0; i < chips.length; i++) {
+            name = chips[i].getAttribute("data-item-name") || "";
+
+            if (!containsValue(values, name)) {
+                values.push(name);
+            }
+        }
+
+        return values.length > 0 ? values : [""];
+    }
+
     function collectColumnValues(key) {
         var rows = getRows();
         var values = [];
-        var attribute = attributeNames[key];
-        var value;
+        var rowValues;
         var i;
+        var j;
 
         for (i = 0; i < rows.length; i++) {
-            value = rows[i].getAttribute(attribute) || "";
+            rowValues = getRowValues(rows[i], key);
 
-            if (!containsValue(values, value)) {
-                values.push(value);
+            for (j = 0; j < rowValues.length; j++) {
+                if (!containsValue(values, rowValues[j])) {
+                    values.push(rowValues[j]);
+                }
             }
         }
 
@@ -214,7 +245,7 @@
 
             label = document.createElement("span");
             label.appendChild(document.createTextNode(
-                value === "" ? "(ללא ערך)" : value
+                value === "" ? state.emptyLabel : value
             ));
 
             option.appendChild(checkbox);
@@ -287,7 +318,8 @@
 
             allValues: [],
             appliedValues: null,
-            temporaryValues: []
+            temporaryValues: [],
+            emptyLabel: isWeekKey(key) ? "(תא ריק)" : "(ללא ערך)"
         };
 
         if (!state.button || !state.menu ||
@@ -406,6 +438,22 @@
 
             setupColumnFilter(key);
         }
+
+        var weekHeaders = table.querySelectorAll("th.week-column[data-col]");
+
+        for (i = 0; i < weekHeaders.length; i++) {
+            setupColumnFilter(weekHeaders[i].getAttribute("data-col"));
+        }
+    }
+
+    function matchesAny(rowValues, allowedValues) {
+        for (var i = 0; i < rowValues.length; i++) {
+            if (containsValue(allowedValues, rowValues[i])) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     function rowMatches(row, globalTerm) {
@@ -432,6 +480,19 @@
             }
         }
 
+        for (key in columnFilterStates) {
+            if (!columnFilterStates.hasOwnProperty(key)) {
+                continue;
+            }
+
+            state = columnFilterStates[key];
+
+            if (state.appliedValues !== null &&
+                !matchesAny(getRowValues(row, key), state.appliedValues)) {
+                return false;
+            }
+        }
+
         for (i = 0; i < columnDefinitions.length; i++) {
             key = columnDefinitions[i].key;
 
@@ -440,15 +501,6 @@
             }
 
             value = row.getAttribute(attributeNames[key]) || "";
-
-            // Multi-select column filter
-            state = columnFilterStates[key];
-
-            if (state && state.appliedValues !== null) {
-                if (!containsValue(state.appliedValues, value)) {
-                    return false;
-                }
-            }
 
             // Preserve existing text filters, if present
             filter = getFilterValue(key);
@@ -1161,14 +1213,17 @@
                 chip.addEventListener("click", function (event) {
                     event.stopPropagation();
 
-                    if (_viewMode !== "planning") {
+                    if (_viewMode !== "planning" ||
+                        chip.getAttribute("data-item-type") !== "Assignment") {
                         return;
                     }
+
+                    var cell = closestElement(chip, ".gantt-cell");
 
                     openAssignmentModal(
                         parseInt(chip.getAttribute("data-id"), 10),
                         parseInt(chip.getAttribute("data-course-id"), 10),
-                        "",
+                        cell ? cell.getAttribute("data-course-name") || "" : "",
                         chip.getAttribute("data-start"),
                         chip.getAttribute("data-end"),
                         parseInt(chip.getAttribute("data-dt-id"), 10),
@@ -1343,7 +1398,9 @@
         for (var j = 0; j < chips.length; j++) {
             chips[j].setAttribute(
                 "draggable",
-                mode === "planning" ? "true" : "false"
+                mode === "planning" &&
+                    chips[j].getAttribute("data-can-drag") === "true" ?
+                    "true" : "false"
             );
         }
 
